@@ -44,36 +44,50 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-   var count = 0;
+  var count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Test Title"),
-      ),
-      drawer: Drawer(
-          child:  ListView(
-        padding: EdgeInsets.zero,
-        children: const [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text("Drawer Header Part"),
+        appBar: AppBar(
+          title: const Text("Test Title"),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    height: 200,
+                    color: Colors.blue,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    height: 200,
+                    color: Colors.red,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    height: 200,
+                    color: Colors.pink,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    height: 200,
+                    color: Colors.orange,
+                  )
+                ],
+              ),
+            ],
           ),
-          ListTile(
-            title: Text("Menu 1"),
-          ),
-        ],
-      )),
-      body: Center(
-        child: Text("COUNT NUMBER: $count"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => count++),
-        tooltip: 'Test tooltip',
-        child: const Icon(Icons.mouse),
-      ),
-    );
+        ));
   }
 }
