@@ -51,25 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text("Test Title"),
         ),
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color:Colors.yellow,
-          child: Stack(
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.blue,
-              ),
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.red,
-                margin: const EdgeInsets.only(top:50, left: 50),
-              )
-            ],
-          )
+        body: Center(
+          child: TextButton(
+            onPressed: ()=>print("button test"),
+            child: const Text("text button"),
+          ),          
         ));
   }
 }
