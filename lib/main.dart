@@ -44,21 +44,47 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var count = 0;
+  final postList = [
+    {
+      "title": "sample title 1",
+      "color": Colors.green,
+    },
+    {
+      "title": "sample title 2",
+      "color": Colors.red,
+    },
+    {
+      "title": "sample title 3",
+      "color": Colors.yellow,
+    },
+    {
+      "title": "sample title 4",
+      "color": Colors.pink,
+    },
+    {
+      "title": "sample title 5",
+      "color": Colors.amber,
+    },
+    {
+      "title": "sample title 6",
+      "color": Colors.green,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: ListView(
-        children: [
-          postContainer(title: "title 1", colorData: Colors.yellow),
-          postContainer(title: "title 2",colorData: Colors.red),
-          postContainer(title: "title 3"),
-          postContainer(title: "title 4"),
-          postContainer(title: "title 5")
-        ],
+      body: ListView.builder(
+        itemCount: postList.length,
+        itemBuilder: (BuildContext con, int index) {
+          return postContainer(
+            title: postList[index]["title"] as String,
+            colorData: postList[index]["color"] as Color,
+          );
+        },
       ),
     );
   }
