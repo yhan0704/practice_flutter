@@ -48,14 +48,40 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Test Title"),
+      appBar: AppBar(
+        title: const Text("Test Title"),
+      ),
+      body: ListView(
+        children: [
+          postContainer(title: "title 1", colorData: Colors.yellow),
+          postContainer(title: "title 2",colorData: Colors.red),
+          postContainer(title: "title 3"),
+          postContainer(title: "title 4"),
+          postContainer(title: "title 5")
+        ],
+      ),
+    );
+  }
+
+  Widget postContainer({String title = "", Color colorData = Colors.blue}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        body: Center(
-          child: TextButton(
-            onPressed: ()=>print("button test"),
-            child: const Text("text button"),
-          ),          
-        ));
+        Container(
+            width: MediaQuery.of(context).size.width,
+            height: 200,
+            color: colorData),
+      ],
+    );
   }
 }
