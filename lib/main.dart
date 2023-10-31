@@ -52,42 +52,24 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text("Test Title"),
         ),
         body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color:Colors.yellow,
+          child: Stack(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    height: 200,
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    height: 200,
-                    color: Colors.red,
-                  )
-                ],
+              Container(
+                width: 200,
+                height: 200,
+                color: Colors.blue,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    height: 200,
-                    color: Colors.pink,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    height: 200,
-                    color: Colors.orange,
-                  )
-                ],
-              ),
+              Container(
+                width: 200,
+                height: 200,
+                color: Colors.red,
+                margin: const EdgeInsets.only(top:50, left: 50),
+              )
             ],
-          ),
+          )
         ));
   }
 }
