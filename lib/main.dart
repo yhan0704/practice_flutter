@@ -77,37 +77,41 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: ListView.builder(
-        itemCount: postList.length,
-        itemBuilder: (BuildContext con, int index) {
-          return postContainer(
-            title: postList[index]["title"] as String,
-            colorData: postList[index]["color"] as Color,
-          );
-        },
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, crossAxisSpacing: 15.0, mainAxisSpacing: 12.0),
+        children: [
+          postContainer(number: "1"),
+          postContainer(number: "2"),
+          postContainer(number: "3"),
+          postContainer(number: "4"),
+          postContainer(number: "1"),
+          postContainer(number: "2"),
+          postContainer(number: "3"),
+          postContainer(number: "4"),
+          postContainer(number: "1"),
+          postContainer(number: "2"),
+          postContainer(number: "3"),
+          postContainer(number: "4"),
+          postContainer(number: "1"),
+          postContainer(number: "2"),
+          postContainer(number: "3"),
+          postContainer(number: "4"),
+          postContainer(number: "1"),
+          postContainer(number: "2"),
+          postContainer(number: "3"),
+          postContainer(number: "4"),
+        ],
       ),
     );
   }
 
-  Widget postContainer({String title = "", Color colorData = Colors.blue}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+  Widget postContainer({String number = "0", Color colorData = Colors.amber}) =>
+      Container(
+        height: 200,
+        color: colorData,
+        child: Center(
+          child: Text("Box $number"),
         ),
-        Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            color: colorData),
-      ],
-    );
-  }
+      );
 }
