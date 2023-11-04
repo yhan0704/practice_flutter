@@ -45,30 +45,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final postList = [
-    {
-      "title": "sample title 1",
-      "color": Colors.green,
-    },
-    {
-      "title": "sample title 2",
-      "color": Colors.red,
-    },
-    {
-      "title": "sample title 3",
-      "color": Colors.yellow,
-    },
-    {
-      "title": "sample title 4",
-      "color": Colors.pink,
-    },
-    {
-      "title": "sample title 5",
-      "color": Colors.amber,
-    },
-    {
-      "title": "sample title 6",
-      "color": Colors.green,
-    },
+    {"number": "0", "color": Colors.amber},
+    {"number": "1", "color": Colors.pink},
+    {"number": "2", "color": Colors.yellowAccent},
+    {"number": "3", "color": Colors.cyan},
+    {"number": "4", "color": Colors.black},
+    {"number": "5", "color": Colors.brown},
+    {"number": "6", "color": Colors.lightBlue},
   ];
 
   @override
@@ -77,31 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: GridView(
+      body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, crossAxisSpacing: 15.0, mainAxisSpacing: 12.0),
-        children: [
-          postContainer(number: "1"),
-          postContainer(number: "2"),
-          postContainer(number: "3"),
-          postContainer(number: "4"),
-          postContainer(number: "1"),
-          postContainer(number: "2"),
-          postContainer(number: "3"),
-          postContainer(number: "4"),
-          postContainer(number: "1"),
-          postContainer(number: "2"),
-          postContainer(number: "3"),
-          postContainer(number: "4"),
-          postContainer(number: "1"),
-          postContainer(number: "2"),
-          postContainer(number: "3"),
-          postContainer(number: "4"),
-          postContainer(number: "1"),
-          postContainer(number: "2"),
-          postContainer(number: "3"),
-          postContainer(number: "4"),
-        ],
+        itemCount: postList.length,
+        itemBuilder: (BuildContext con, int index) {
+          return postContainer(
+            number: postList[index]["number"] as String,
+            colorData: postList[index]["color"] as Color,
+          );
+        },
       ),
     );
   }
