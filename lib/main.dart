@@ -60,26 +60,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 15.0, mainAxisSpacing: 12.0),
-        itemCount: postList.length,
-        itemBuilder: (BuildContext con, int index) {
-          return postContainer(
-            number: postList[index]["number"] as String,
-            colorData: postList[index]["color"] as Color,
-          );
-        },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                color: Colors.green),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                color: Colors.yellow),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                color: Colors.pink),
+          ],
+        ),
       ),
     );
   }
-
-  Widget postContainer({String number = "0", Color colorData = Colors.amber}) =>
-      Container(
-        height: 200,
-        color: colorData,
-        child: Center(
-          child: Text("Box $number"),
-        ),
-      );
 }
