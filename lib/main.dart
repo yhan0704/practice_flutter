@@ -64,39 +64,25 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text("Test Title"),
         ),
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            'assets/images/1.jpg', // 이미지 파일의 경로에 맞게 수정
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext con) {
-                    return AlertDialog(
-                      title: const Text("Dialog Text"),
-                      content: Container(
-                        child: const Text("Dialog Content"),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text("close"),
-                        )
-                      ],
-                    );
-                  },
-                );
-              },
-              child: const Text("button"),
+      body: Container(
+        child: Row(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Container(
+                height: 150,
+                color: Colors.red,
+              ),
             ),
-          ),
-        ],
+            Flexible(
+              flex: 1,
+              child: Container(
+                height: 150,
+                color: Colors.lightBlue,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
