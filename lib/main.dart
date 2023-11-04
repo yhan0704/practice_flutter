@@ -60,34 +60,31 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: SizedBox(
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-          ],
+      body: Container(
+        child: Center(
+          child: TextButton(
+            onPressed: () {
+              showDialog(context: context, 
+              builder: (BuildContext con){
+                return AlertDialog(
+                  title: const Text("Dialog Text"),
+                  content: Container(
+                    child: const Text(
+                      "Dialog Content"
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: ()=> Navigator.of(context).pop(),
+                      child: const Text("close"),
+                    )
+                  ],
+                );
+              },
+              );
+            },
+            child: const Text("button"),
+          ),
         ),
       ),
     );
