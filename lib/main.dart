@@ -58,34 +58,45 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Test Title"),
+        backgroundColor: Colors.lightBlueAccent,
+        title: Container(
+          alignment: Alignment.center,
+          child: const Text("Test Title"),
+        ),
       ),
-      body: Container(
-        child: Center(
-          child: TextButton(
-            onPressed: () {
-              showDialog(context: context, 
-              builder: (BuildContext con){
-                return AlertDialog(
-                  title: const Text("Dialog Text"),
-                  content: Container(
-                    child: const Text(
-                      "Dialog Content"
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: ()=> Navigator.of(context).pop(),
-                      child: const Text("close"),
-                    )
-                  ],
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/images/1.jpg', // 이미지 파일의 경로에 맞게 수정
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext con) {
+                    return AlertDialog(
+                      title: const Text("Dialog Text"),
+                      content: Container(
+                        child: const Text("Dialog Content"),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text("close"),
+                        )
+                      ],
+                    );
+                  },
                 );
               },
-              );
-            },
-            child: const Text("button"),
+              child: const Text("button"),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
