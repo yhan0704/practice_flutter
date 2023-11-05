@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:practice/second.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -56,16 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
     {"number": "6", "color": Colors.lightBlue},
   ];
 
-   static String youtubeId = 'c7hih7mQJw4';
+  static Future loadJson() async {
+    final String response = await rootBundle.loadString("lib/users.json");
+    final data = await json.decode(response);
+    return data["students"];
+  }
 
-  final YoutubePlayerController _con = YoutubePlayerController(
-    initialVideoId: youtubeId,
-    flags: const YoutubePlayerFlags(
-      autoPlay: true,
-      mute: false,
-      disableDragSeek: false,
-    ),
-  );
+  Future userList = loadJson();
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +73,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Test Title"),
       ),
-      body: YoutubePlayer(
-        controller: _con,
+      body: Container(
+        child: FutureBuilder(
+          future: userList,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext con, int index) {
+                  return Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                        "${snapshot.data[index]["id"]} : ${snapshot.data[index]["full_name"]}"),
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return const Center(
+                child: Text("Error"),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }
