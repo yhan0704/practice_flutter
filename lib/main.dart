@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice/second.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,30 +56,25 @@ class _MyHomePageState extends State<MyHomePage> {
     {"number": "6", "color": Colors.lightBlue},
   ];
 
+   static String youtubeId = 'c7hih7mQJw4';
+
+  final YoutubePlayerController _con = YoutubePlayerController(
+    initialVideoId: youtubeId,
+    flags: const YoutubePlayerFlags(
+      autoPlay: true,
+      mute: false,
+      disableDragSeek: false,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlueAccent,
-        title: Container(
-          alignment: Alignment.center,
-          child: const Text("Test Title"),
-        ),
+        title: Text("Test Title"),
       ),
-      body: Center(
-        child: GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const SecondView(),
-            ),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            color: Colors.blue,
-            child: const Text("Get Started"),
-          ),
-        ),
+      body: YoutubePlayer(
+        controller: _con,
       ),
     );
   }
