@@ -64,25 +64,38 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text("Test Title"),
         ),
       ),
-      body: Container(
-        child: Row(
-          children: [
-            Flexible(
-              flex: 1,
-              child: Container(
-                height: 150,
-                color: Colors.red,
+      body: Column(
+        children: [
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.blue[100] as Color,
+                  Colors.blue[300] as Color,
+                  Colors.blue[500] as Color
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.2, 0.8, 0.2],
               ),
             ),
-            Flexible(
-              flex: 1,
-              child: Container(
-                height: 150,
-                color: Colors.lightBlue,
-              ),
+          ),
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              gradient: RadialGradient(colors: [
+                Colors.blue[100] as Color,
+                Colors.blue[300] as Color,
+                Colors.blue[500] as Color
+              ], radius: 0.5
+                  // stops: const [0.2, 0.8, 0.2]),
+                  ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
