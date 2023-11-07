@@ -41,65 +41,80 @@ class MyApp extends StatelessWidget {
   }
 }
 
-@override
-void initState() {
-  super.initState();
-
-  _getUsername();
-}
-
-_saveUsername() {
-  setState(() {
-    _username = userIdController.text;
-
-    _prefs.setString("currentUsername", userIdController.text);
-  });
-}
-
-_getUsername() async {
-  _prefs = await SharedPreferences.getInstance();
-
-  setState(() => _username = _prefs.getString("currentUsername") ?? "Not set");
-}
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(
+        () => setState(() => _selectedIndex = _tabController.index));
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test Title"),
+        title: const Text("Test Title"),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(15),
-                child: Text("Current Username: $_username"),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width / 2,
-                child: TextField(
-                  controller: userIdController,
-                  textAlign: TextAlign.left,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Input your username",
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => _saveUsername(),
-                child: Container(
-                  color: Colors.green,
-                  padding: EdgeInsets.all(15),
-                  child: Text("Save"),
-                ),
-              ),
-            ],
+      body: _selectedIndex == 0
+          ? tabContainer(context, Colors.indigo, "Friends Tab")
+          : _selectedIndex == 1
+              ? tabContainer(context, Colors.amber, "Chats Tab")
+              : tabContainer(context, Colors.blueGrey, "Settings Tab"),
+      bottomNavigationBar: TabBar(
+        controller: _tabController,
+        labelColor: Colors.black,
+        tabs: [
+          Tab(
+            icon: Icon(
+              _selectedIndex == 0 ? Icons.person : Icons.person_2_outlined,
+            ),
+            text: "Friends",
+          ),
+          Tab(
+            icon: Icon(
+              _selectedIndex == 1 ? Icons.chat : Icons.chat_outlined,
+            ),
+            text: "Chats",
+          ),
+          Tab(
+            icon: Icon(
+              _selectedIndex == 2 ? Icons.settings : Icons.settings_outlined,
+            ),
+            text: "Settings",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container tabContainer(BuildContext context, Color tabColor, String tabText) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: tabColor,
+      child: Center(
+        child: Text(
+          tabText,
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
       ),
