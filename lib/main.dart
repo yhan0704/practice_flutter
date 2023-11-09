@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:practice/countController.dart';
 import 'package:practice/second.dart';
 import 'package:practice/view/album_view.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const AlbumView(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -56,7 +58,31 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Test Title"),
       ),
-      body: Container(),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<CountController>(
+              init: CountController(),
+              builder: (_) =>
+                  Text("Current Count:${Get.find<CountController>().counter}"),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () => Get.find<CountController>().increase(),
+                  child: const Text("증가"),
+                ),
+                TextButton(
+                  onPressed: () => Get.find<CountController>().decrease(),
+                  child: const Text("감소"),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
