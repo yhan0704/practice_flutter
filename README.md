@@ -5,6 +5,8 @@ Source - Youtube - "TOTALLY 개발자"
 
 A new Flutter project.
 
+start project - tasks - Udemy course
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
