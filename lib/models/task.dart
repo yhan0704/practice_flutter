@@ -48,4 +48,9 @@ class Task extends Equatable{
   List<Object?> get props => [
     title, isDone, isDeleted
   ];
+
+  @override
+  String toString() {
+    return 'Task{id: $title, isDone:$isDone, isDelete:$isDeleted}';
+  }
 }
