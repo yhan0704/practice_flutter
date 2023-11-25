@@ -1,18 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice/services/guid_gen.dart';
 
 import '../blocs/bloc/tasks_bloc.dart';
 import '../models/task.dart';
 
 class AddtaskScreen extends StatelessWidget {
-    const AddtaskScreen({
+  const AddtaskScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-  TextEditingController titleController = TextEditingController();
+    TextEditingController titleController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(children: [
@@ -40,7 +40,7 @@ class AddtaskScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                var task = Task(title: titleController.text);
+                var task = Task(title: titleController.text, id:GUIDGen.generate(),);
                 context.read<TasksBloc>().add(AddTask(task: task));
                 Navigator.pop(context);
               },

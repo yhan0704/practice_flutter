@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:practice/blocs/bloc/tasks_bloc.dart';
-import 'package:practice/models/task.dart';
 import 'package:practice/screens/tasks_screen.dart';
 
-void main() {
-  BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-  );
+import 'blocs/bloc_exports.dart';
+
+void main() async {
+ 
+WidgetsFlutterBinding.ensureInitialized();
+ 
+HydratedBloc.storage = await HydratedStorage.build(
+storageDirectory: await getApplicationDocumentsDirectory(),
+);
+ 
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TasksBloc()..add(AddTask(task: Task(title:'Task1'))),
+      create: (context) => TasksBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
